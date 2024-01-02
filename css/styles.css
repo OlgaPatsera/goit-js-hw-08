@@ -15,18 +15,16 @@ background-color: #fff;
 
 .gallery-item {
     list-style: none;
-    
   }
 .gallery-link{
   display: flex;
 }
-/* .gallery-link:hover{
-  color:
-} */
+
 .gallery-image {
     display: block;
     max-width: 100%;
     height: auto;
-    width: 360px;
 }
-
+.gallery-image:hover{
+  transform: scale(1.03);
+} 

@@ -45,18 +45,19 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-// preview — посилання на маленьку версію зображення для картки галереї
-// original — посилання на велику версію зображення для модального вікна
-// description — текстовий опис зображення, для атрибута alt малого зображення та підпису великого зображення в модалці.
+
 const gallery = document.querySelector('.gallery');
+
 const markup = images
   .map(
     ({ description, original, preview }) =>
-      `<li class="gallery-item"><a class="gallery-link" href="${original}"><img class="gallery-image" src="${preview}" data-sourse="${original}" alt="${description}"/></a></li>`
+      `<li class="gallery-item"><a class="gallery-link" href="${original}"><img class="gallery-image" src="${preview}" data-sourse="${original}" alt="${description}" width="360" height="200"/></a></li>`
   )
   .join('');
+
 gallery.innerHTML = markup;
 gallery.addEventListener('click', galleryClick);
+
 function galleryClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
