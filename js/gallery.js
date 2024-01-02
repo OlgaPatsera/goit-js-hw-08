@@ -65,30 +65,18 @@ function galleryClick(event) {
     // виходимо з обробки події, якщо ми клікнули на контейнер карточок
     return;
   }
-  const instance = basicLightbox.create(`
-  <div class="modal"><a class="modal-link" href="${event.target.dataset.sourse}"><
-  img class="modal-image" src="${event.target.dataset.sourse}" alt="${event.target.alt}"/></a>
-  </div>
-`);
-  /* const liEl = event.target.closest(".product-item"); // знаходимо посилання на найближчий батьківський елемент з таким селектором
-  const productId = Number(liEl.dataset.id);
-  const product = products.find(({ id }) => id === productId); // знаходимо потрібний нам обʼєкт з масиву для подальшого взяття інформації для модального вікна
-
-  const instance = basicLightbox.create(`
-  <div class="modal">
-    <img  src="${product.img}" alt="${product.name}">
-    <h2>${product.name}</h2>
-    <p>Ціна: ${product.price} грн</p>
-    <p>${product.description}</p>
-  </div>
-`);
-
+  const original = event.target.dataset.sourse;
+  const description = event.target.dataset.description;
+  const instance =
+    basicLightbox.create(`<div class="modal"><img class="modal-image" src="${original}" data-sourse="${original}" alt="${description}"/>
+</div>`);
+  // const instance = basicLightbox.create(`<div class="modal"><a class="modal-link" href="${event.target.dataset.sourse}"><
+  // img class="modal-image" src="${event.target.dataset.sourse}" alt="${event.target.alt}"/></a></div>`);
   instance.show();
+
 }
 
-function createMarkup(arr) {
-  return arr */
-}
+
 /* <li class="gallery-item">
   <a class="gallery-link" href="large-image.jpg">
     <img
