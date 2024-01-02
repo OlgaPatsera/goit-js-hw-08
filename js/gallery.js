@@ -51,39 +51,35 @@ const images = [
 const gallery = document.querySelector('.gallery');
 const markup = images
   .map(
-    image =>
-      `<li class="gallery-item"><a class="gallery-link" href="${image.original}"><img class="gallery-image" src="${image.preview}" data-sourse="${image.original} alt="${image.description}"/></a></li>`
+    ({ description, original, preview }) =>
+      `<li class="gallery-item"><a class="gallery-link" href="${original}"><img class="gallery-image" src="${preview}" data-sourse="${original}" alt="${description}"/></a></li>`
   )
   .join('');
 gallery.innerHTML = markup;
-console.log(gallery);
 gallery.addEventListener('click', galleryClick);
-
 function galleryClick(event) {
   event.preventDefault();
   if (event.target === event.currentTarget) {
-    // виходимо з обробки події, якщо ми клікнули на контейнер карточок
     return;
   }
   const original = event.target.dataset.sourse;
-  const description = event.target.dataset.description;
-  const instance =
-    basicLightbox.create(`<div class="modal"><img class="modal-image" src="${original}" data-sourse="${original}" alt="${description}"/>
-</div>`);
-  // const instance = basicLightbox.create(`<div class="modal"><a class="modal-link" href="${event.target.dataset.sourse}"><
-  // img class="modal-image" src="${event.target.dataset.sourse}" alt="${event.target.alt}"/></a></div>`);
+  const description = event.target.alt;
+  const instance = basicLightbox.create(
+    `<div class="modal"><a class="modal-link" href="${original}"><img class="modal-image" src="${original}" data-sourse="${original}" alt="${description}" width="1112" height="640"/></a></div>`,
+    {
+      onShow: () => {
+        document.addEventListener('keydown', closeModal);
+      },
+      onClose: () => {
+        document.removeEventListener('keydown', closeModal);
+      },
+    }
+  );
+  const closeModal = event => {
+    document.addEventListener('keydown', closeModal);
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  };
   instance.show();
-
 }
-
-
-/* <li class="gallery-item">
-  <a class="gallery-link" href="large-image.jpg">
-    <img
-      class="gallery-image"
-      src="small-image.jpg"
-      data-source="large-image.jpg"
-      alt="Image description"
-    />
-  </a>
-</li> */
